@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import "./App.css";
 // import the Container Component from the semantic-ui-react
@@ -7,33 +7,27 @@ import "./App.css";
 // import the ToDoList component
 //import ToDoList from "./To-Do-List";
 
-
+const fetchAPI = () => {
+  return axios.get("http://localhost:8080/api/task").then((res) => {
+    console.log(res);
+    var JSONdata = JSON.stringify(res.data);
+    return JSONdata;
+  });
+};
 export default function App() {
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/task')
-      .then(response => {
-        //console.log(response)
-        console.log(response.data)
-        var JSONdata = JSON.stringify(response.data)
-        console.log(JSONdata)
-        //const list = JSONdata.map(one => <div>{one}</div>)
-        //console.log(list)
-        setProduct(JSONdata)
-        //setProduct())
-        //setProduct(response || "NO DATA")
-      })
-  }, [])
+    fetchAPI().then((pr) => {
+      setProduct(pr || "NO DATA!");
+    });
+  }, []);
 
   return (
     <div className="App">
       <h1>Sup</h1>
       <h2>bruh</h2>
-      <p>
-        {product}
-      </p>
+      <pre>{product}</pre>
     </div>
   );
 }
-
