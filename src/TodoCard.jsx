@@ -1,8 +1,10 @@
 import React from "react";
 
+import { useHistory } from "react-router-dom";
 const TodoCard = (props) => {
   const { todo } = props;
-  const { title, completed } = todo;
+  const { id, title, description, completed } = todo;
+  let history = useHistory();
   return (
     <div
       style={{
@@ -11,6 +13,11 @@ const TodoCard = (props) => {
         padding: "15px",
         width: "150px",
       }}
+      onClick={() =>
+        history.push(
+          `/todo/${id}?title=${title}&description=${description}&completed=${completed}`
+        )
+      }
     >
       <h4>{title}</h4>
       <h6>{`Completed: ${completed}`}</h6>

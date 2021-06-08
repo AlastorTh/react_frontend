@@ -4,10 +4,12 @@ import { useState } from "react";
 import { CircularProgress } from "@material-ui/core";
 import TodoCard from "./TodoCard";
 
+const endpoint = "http://localhost:8080/api";
+
 const Todos = () => {
   const [todos, setTodos] = useState();
   useEffect(() => {
-    axios.get("http://localhost:8080/api/task").then((res) => {
+    axios.get(endpoint + "/task").then((res) => {
       const responseTodos = res.data;
       setTodos(responseTodos);
     });
