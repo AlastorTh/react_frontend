@@ -5,6 +5,13 @@ const TodoCard = (props) => {
   const { todo } = props;
   const { id, title, description, completed } = todo;
   let history = useHistory();
+
+  const boolParse = () => {
+    if (completed === true) {
+      return "yes";
+    }
+    return "no";
+  };
   return (
     <div
       style={{
@@ -20,7 +27,7 @@ const TodoCard = (props) => {
       }
     >
       <h4>{title}</h4>
-      <h6>{`Completed: ${completed}`}</h6>
+      <h6>{`Completed: ${boolParse()}`}</h6>
     </div>
   );
 };

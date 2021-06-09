@@ -15,7 +15,11 @@ export default function App() {
           <Route path="/todos" children={<Todos />} />
           <Route path="/todo/:id" children={<Todo />} />
           <Route path="/create" children={<Create />} />
-          <Route path="/update/:id" children={<Update />} />
+          <Route
+            path="/update/:id"
+            render={(props) => <Update {...props} />}
+            //children={<Update />}
+          />
         </Switch>
       </Router>
     </div>

@@ -1,22 +1,25 @@
 import React from "react";
 import { useHttp } from "./httpHook";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Update = (props) => {
   console.log(props);
-  const { ID, title, description, completed } = props.location.AboutTodo;
+  console.log(props.location);
+  const { ID, title, description, completed } = props.location.aboutTodo;
   const [form, setForm] = useState({
-    userID: 0,
+    //userID: 0,
     title: "",
     description: "",
-    сompleted: false,
+    completed: false,
   });
-
   const { request } = useHttp();
   const dataFunc = async () => {
+    console.log("In datafunc");
     try {
-      form.userID = parseInt(form.userID);
-      if (form.completed === "yes") {
+      //form.userID = parseInt(form.userID);
+      console.log({ ...form });
+      if (form.completed === "true") {
         form.completed = true;
       } else {
         form.completed = false;
@@ -74,11 +77,6 @@ const Update = (props) => {
                       List all
                     </a>
                   </li>
-                  <li>
-                    <a class="grey-text text-lighten-3" href="#!">
-                      Find one
-                    </a>
-                  </li>
                 </ul>
               </div>
             </div>
@@ -91,17 +89,9 @@ const Update = (props) => {
       <div className="row">
         <form className="col s12">
           <div className="row">
-            <div className="input-field col s6">
+            <div className="input-field col s12">
               <input
-                onChange={changeHandler}
-                id="userID"
-                type="number"
-                class="validate"
-              ></input>
-              <label className="active">Id</label>
-            </div>
-            <div className="input-field col s6">
-              <input
+                defaultValue={title}
                 onChange={changeHandler}
                 id="title"
                 type="text"
@@ -110,33 +100,39 @@ const Update = (props) => {
               <label className="active">Task Title</label>
             </div>
           </div>
-          <div className="input-field col s12">
-            <input
-              onChange={changeHandler}
-              id="description"
-              type="text"
-              class="validate"
-            ></input>
-            <label className="active">Description</label>
+          <div className="row">
+            <div className="input-field col s12">
+              <input
+                defaultValue={description}
+                onChange={changeHandler}
+                id="description"
+                type="text"
+                class="validate"
+              ></input>
+              <label className="active">Description</label>
+            </div>
           </div>
           <label>Completed?</label>
           <select
+            defaultValue={completed}
             id="completed"
             onChange={changeHandler}
             class="browser-default"
           >
-            <option value="yes">yes</option>
-            <option value="no">no</option>
+            <option value="true">yes</option>
+            <option value="false">no</option>
           </select>
         </form>
-        <button
-          onClick={dataFunc}
-          className="btn waves-effect waves-light"
-          type="submit"
-          name="action"
-        >
-          Submit
-        </button>
+        <Link to="/todos">
+          <button
+            onClick={dataFunc}
+            className="btn waves-effect waves-light"
+            //type="submit"
+            name="action"
+          >
+            Submit
+          </button>
+        </Link>
       </div>
     </div>
   );

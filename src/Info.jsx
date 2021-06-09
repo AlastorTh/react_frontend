@@ -33,11 +33,6 @@ const Info = () => {
                     List all
                   </a>
                 </li>
-                <li>
-                  <a class="grey-text text-lighten-3" href="#!">
-                    Find one
-                  </a>
-                </li>
               </ul>
             </div>
           </div>

@@ -1,11 +1,10 @@
-import axios from "axios";
 import React from "react";
 import { useHttp } from "./httpHook";
 import { useState } from "react";
 
 const Create = () => {
   const [form, setForm] = useState({
-    userID: 0,
+    //userID: 0,
     title: "",
     description: "",
     сompleted: false,
@@ -14,17 +13,17 @@ const Create = () => {
   const { request } = useHttp();
   const dataFunc = async () => {
     try {
-      form.userID = parseInt(form.userID);
+      //form.userID = parseInt(form.userID);
       if (form.completed === "yes") {
         form.completed = true;
       } else {
         form.completed = false;
       }
-      console.log(form);
+      console.log("dataFunc FORM: ", form);
       const data = await request("http://localhost:8080/api/task", "POST", {
         ...form,
       });
-      console.log(data);
+      console.log("Server resp:", data);
     } catch {}
   };
 
@@ -69,11 +68,6 @@ const Create = () => {
                       List all
                     </a>
                   </li>
-                  <li>
-                    <a class="grey-text text-lighten-3" href="#!">
-                      Find one
-                    </a>
-                  </li>
                 </ul>
               </div>
             </div>
@@ -86,16 +80,7 @@ const Create = () => {
       <div className="row">
         <form className="col s12">
           <div className="row">
-            <div className="input-field col s6">
-              <input
-                onChange={changeHandler}
-                id="userID"
-                type="number"
-                class="validate"
-              ></input>
-              <label className="active">Id</label>
-            </div>
-            <div className="input-field col s6">
+            <div className="input-field col s12">
               <input
                 onChange={changeHandler}
                 id="title"
@@ -105,14 +90,16 @@ const Create = () => {
               <label className="active">Task Title</label>
             </div>
           </div>
-          <div className="input-field col s12">
-            <input
-              onChange={changeHandler}
-              id="description"
-              type="text"
-              class="validate"
-            ></input>
-            <label className="active">Description</label>
+          <div className="row">
+            <div className="input-field col s12">
+              <input
+                onChange={changeHandler}
+                id="description"
+                type="text"
+                class="validate"
+              ></input>
+              <label className="active">Description</label>
+            </div>
           </div>
           <label>Completed?</label>
           <select
