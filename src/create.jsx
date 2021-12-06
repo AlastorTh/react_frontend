@@ -5,20 +5,14 @@ import { useState } from "react";
 const Create = () => {
   const [form, setForm] = useState({
     //userID: 0,
-    title: "",
-    description: "",
-    сompleted: false,
+    login: "",
+    password: "",
   });
 
   const { request } = useHttp();
   const dataFunc = async () => {
     try {
       //form.userID = parseInt(form.userID);
-      if (form.completed === "yes") {
-        form.completed = true;
-      } else {
-        form.completed = false;
-      }
       console.log("dataFunc FORM: ", form);
       const data = await request("http://localhost:8080/api/task", "POST", {
         ...form,
@@ -83,33 +77,24 @@ const Create = () => {
             <div className="input-field col s12">
               <input
                 onChange={changeHandler}
-                id="title"
+                id="login"
                 type="text"
                 class="validate"
               ></input>
-              <label className="active">Task Title</label>
+              <label className="active">login</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               <input
                 onChange={changeHandler}
-                id="description"
+                id="password"
                 type="text"
                 class="validate"
               ></input>
-              <label className="active">Description</label>
+              <label className="active">password</label>
             </div>
           </div>
-          <label>Completed?</label>
-          <select
-            id="completed"
-            onChange={changeHandler}
-            class="browser-default"
-          >
-            <option value="yes">yes</option>
-            <option value="no">no</option>
-          </select>
         </form>
         <button
           onClick={dataFunc}
